@@ -1,4 +1,8 @@
 ## Interface: 11200
-## Title: RogueAttack
-## Notes: My first AddOn
+## Title: RogueAttack 1.0
+## Version: 1.0
+## Notes: Decides which skill is used by villains.
+## Notes-deDE: Entscheidet welche Fähigkeit vom Schurken genutzt wird.
+## Author: Ambro
+## Dependencies: IsBuffActive, MobInfo2
 RogueAttack.lua

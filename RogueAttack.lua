@@ -2,9 +2,14 @@ function MakeMyAttacks()
 	local c=GetComboPoints()
 	local b=IsBuffActive("Zerh\195\164ckseln")
 	local e=UnitMana("player")
-	--local p=UnitHealth("target")*100/UnitHealthMax("target")
+	local playerHealth=UnitHealth("player")
 	local h = MobHealth_GetTargetCurHP()
-	-- Wenn man min. 1 Combopunkt hat, Zerhäckseln inaktiv ist und man min. 25 Energie hat wird Zerhäckseln aktiviert
+	--UseContainerItem(0, 1, 1)
+	local ItemLink = GetContainerItemLink(0, 1)
+	
+	--DEFAULT_CHAT_FRAME:AddMessage("item="..ItemLink)
+	
+	-- Wenn man min. 1 Combopunkt hat, ZerhÃ¤ckseln inaktiv ist und man min. 25 Energie hat wird ZerhÃ¤ckseln aktiviert
 	if c > 0 and not b and e >= 25 then
 		CastSpellByName("Zerh\195\164ckseln")
 	-- Wenn man 5 Combopunkte hat oder der Gegner fast tot ist und man min. 35 Energie hat wird Ausweiden benutzt
@@ -13,18 +18,20 @@ function MakeMyAttacks()
 		if c < 5 then
 			--DEFAULT_CHAT_FRAME:AddMessage("Gegner HP="..h.." Ausweiden("..c..")="..getAvgEviscerateDamage(c))
 		end
-	-- Wenn man min. 40 Energie hat wird Finsterer Stoß benutzt
+	-- Wenn man min. 40 Energie hat wird Finsterer StoÃŸ benutzt
 	elseif e >= 40 then
 		CastSpellByName("Finsterer Sto\195\159")
 	end
 	--todo heiltrank bei x %
 	--todo klingenwirbel und adrenalinrausch
 	--todo tritt
-	--todo finte, entrinnen, verschwinden bei aggro aber nur in gruppe oder raid (ktm schlägt alarm)
+	--todo finte, entrinnen, verschwinden bei aggro aber nur in gruppe oder raid (ktm schlÃ¤gt alarm)
 	--todo sheep, eisfalle, sleep nicht hauen
 	--todo erdrosseln als opener wenn unsichtbar
 	--todo gucken ob blutung aktiv ist und wenn nicht erneuern
 end
+
+-- http://wowwiki.wikia.com/index.php#Character_Functions
 
 function getAvgEviscerateDamage(pComboPoints)
 	local base, pos, neg = UnitAttackPower("player")
@@ -81,7 +88,7 @@ function getAvgEviscerateDamage(pComboPoints)
 	-- 30 % Crit
 	local crit = avgDmg * 0.3
 	
-	-- Der Schaden wird noch um 0 % reduziert was die Rüstung des Gegeners simulieren soll
+	-- Der Schaden wird noch um 0 % reduziert was die RÃ¼stung des Gegeners simulieren soll
 	return (avgDmg + modifier + crit) * 1.00
 end
 
