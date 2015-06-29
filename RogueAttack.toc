@@ -1,0 +1,4 @@
+## Interface: 11200
+## Title: RogueAttack
+## Notes: My first AddOn
+RogueAttack.lua
