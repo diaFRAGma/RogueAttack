@@ -12,6 +12,7 @@ Fast tot:
 Ein Gegner wird als fast tot erkannt, wenn man mit den vorhandenen Combopunkten Ausweiden auf ihn wirkt und er danach vermutlich tot ist.
 Hierbei werden die Anzahl an vorhandenen Combopunkten berücksichtig, der Rang von Ausweiden, die Angriffskraft des Schurken (inklusive Buffs und Equip) und eine 30 % Critchance. Die Rüstung des Gegners, der den Ausweiden Schaden wiederum verringern könnte wurde aus der Berechnung rausgelassen. Nach ein paar Tests stellte sich raus, dass es besser ist davon auszugehen, dass Ausweiden mehr Schaden macht als tatsächlich um zu bewirken, dass es somit auch eher genutzt wird. Es kommt sonst oft dazu, dass man viel Schaden über den Tod macht, der dann verschenkt ist. Besser der Gegner lebt nach dem Ausweiden noch mit so wenig HP, dass er durch den nächsten Autohit umfällt.
 
+Abhängikeiten:
 Das Addon IsBuffActive wird benötigt um festzustellen ob Zerhäckseln auf dem Schurken aktiv ist.
 Das Addon MobInfo2 wird benötigt um das restliche Leben des Gegners auszulesen.
 
