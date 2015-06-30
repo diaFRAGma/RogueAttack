@@ -2,36 +2,43 @@ function MakeMyAttacks()
 	local c=GetComboPoints()
 	local b=IsBuffActive("Zerh\195\164ckseln")
 	local e=UnitMana("player")
-	local playerHealth=UnitHealth("player")
+	local playerHealth=UnitHealth("player")*100/UnitHealthMax("player")
 	local h = MobHealth_GetTargetCurHP()
-	--UseContainerItem(0, 1, 1)
-	local ItemLink = GetContainerItemLink(0, 1)
+	local inFight = UnitAffectingCombat("player")
 	
-	--DEFAULT_CHAT_FRAME:AddMessage("item="..ItemLink)
+	--DEFAULT_CHAT_FRAME:AddMessage("Debug")
 	
+	-- Wenn man im Kampf ist und nur noch 5 % HP oder darunter hat, dann wird ein Heiltrank genommen
+	if playerHealth <= 5 and inFight == 1 then
+		useContainerItemByName("Erheblicher Heiltrank") -- 1050-1751
+		useContainerItemByName("\195\156berragender Heiltrank") -- 700-901
+		useContainerItemByName("Gro\195\159er Heiltrank") -- 455-586
+		useContainerItemByName("Heiltrank") -- 280-361
+		useContainerItemByName("Geringer Heiltrank") -- 140-181
+	end
 	-- Wenn man min. 1 Combopunkt hat, Zerhäckseln inaktiv ist und man min. 25 Energie hat wird Zerhäckseln aktiviert
 	if c > 0 and not b and e >= 25 then
 		CastSpellByName("Zerh\195\164ckseln")
 	-- Wenn man 5 Combopunkte hat oder der Gegner fast tot ist und man min. 35 Energie hat wird Ausweiden benutzt
 	elseif (c == 5 or (c > 0 and h <= getAvgEviscerateDamage(c))) and e >= 35 then
 		CastSpellByName("Ausweiden")
-		if c < 5 then
-			--DEFAULT_CHAT_FRAME:AddMessage("Gegner HP="..h.." Ausweiden("..c..")="..getAvgEviscerateDamage(c))
-		end
 	-- Wenn man min. 40 Energie hat wird Finsterer Stoß benutzt
 	elseif e >= 40 then
 		CastSpellByName("Finsterer Sto\195\159")
 	end
-	--todo heiltrank bei x %
-	--todo klingenwirbel und adrenalinrausch
-	--todo tritt
-	--todo finte, entrinnen, verschwinden bei aggro aber nur in gruppe oder raid (ktm schlägt alarm)
-	--todo sheep, eisfalle, sleep nicht hauen
-	--todo erdrosseln als opener wenn unsichtbar
-	--todo gucken ob blutung aktiv ist und wenn nicht erneuern
 end
 
--- http://wowwiki.wikia.com/index.php#Character_Functions
+function useContainerItemByName(pName)
+	for bag = 0,4 do
+		for slot = 1,GetContainerNumSlots(bag) do
+			local itemlink = GetContainerItemLink(bag, slot)
+			if itemlink ~= nil and string.find(tostring(itemlink), pName) then
+				UseContainerItem(bag, slot, 1)
+				break
+			end
+		end
+	end
+end
 
 function getAvgEviscerateDamage(pComboPoints)
 	local base, pos, neg = UnitAttackPower("player")

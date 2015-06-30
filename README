@@ -3,9 +3,10 @@ World of Warcraft 1.12.1 Addon für Schurken
 Im Spiel muss ein Makro angelegt werden mit folgendem Inhalt:
 /run MakeMyAttacks()
 Wenn das Makro durch betätigen des Knopfes ausgelöst wird, laufen folgende Entscheidungen ab:
-1. Wenn Zeräckseln nicht aktiv ist, man aber mindestens ein Combopunkt hat und man mindestens 25 Energie hat wird Zerhäckseln aktiviert.
-2. Wenn man 5 Combopunkte hat oder der Gegner fast tot ist (siehe Fast tot Erläuterung) und man mindestens 35 Energie hat wird Ausweiden benutzt.
-3. Wenn man mindestens 40 Energie hat wird Finsterer Stoß benutzt um Combopunkte aufzubauen
+1. Wenn man im Kampf ist und nur noch 5 % HP oder darunter hat, dann wird ein Heiltrank genommen, wenn im Inventar einer zu finden ist.
+2. Wenn Zeräckseln nicht aktiv ist, man aber mindestens ein Combopunkt hat und man mindestens 25 Energie hat wird Zerhäckseln aktiviert.
+3. Wenn man 5 Combopunkte hat oder der Gegner fast tot ist (siehe Fast tot Erläuterung) und man mindestens 35 Energie hat wird Ausweiden benutzt.
+4. Wenn man mindestens 40 Energie hat wird Finsterer Stoß benutzt um Combopunkte aufzubauen
 
 Fast tot:
 Ein Gegner wird als fast tot erkannt, wenn man mit den vorhandenen Combopunkten Ausweiden auf ihn wirkt und er danach vermutlich tot ist.
@@ -13,3 +14,21 @@ Hierbei werden die Anzahl an vorhandenen Combopunkten berücksichtig, der Rang vo
 
 Das Addon IsBuffActive wird benötigt um festzustellen ob Zerhäckseln auf dem Schurken aktiv ist.
 Das Addon MobInfo2 wird benötigt um das restliche Leben des Gegners auszulesen.
+
+Bekannte Fehler:
+- Wenn im Inventar nach "Heiltrank" gesucht wird, dann werden alle Sorten von Heiltrank gefunden. Um das zu beheben müsste man ein itemLink genauer betrachten können. Mögliche Hilfe: http://eu.battle.net/wow/en/forum/topic/2151760692
+
+Zukünftige Features?:
+- Bestimmte casts von Bossen werden durch Tritt unterbrochen
+- Aggro wird durch Finte oder Verschwinden reduziert. Im Notfall wird Entrinnen aktiviert. Es sollte dabei geprüft werden ob man alleine spielt oder mit einem Tank. Eine Abhängigkeit von KTM wäre denkbar um die Aggro auszulesen.
+- Klingenwirbel und Adrenalinrausch wird aktiviert
+- Sheep, Eisfalle oder Sleep darf nicht angegriffen werden
+- Erdrosseln wird als Opener bentutzt, wenn man unsichtbar ist
+- Gucken ob Blutung aktiv ist und wenn nicht erneuern
+
+Nützliche Links:
+World of Warcraft 1.12.1 API
+http://vanilla-wow.wikia.com/wiki/World_of_Warcraft_API
+http://www.wowwiki.com/index.php?title=World_of_Warcraft_API&oldid=281620
+Programming in Lua
+http://www.lua.org/pil/contents.html
