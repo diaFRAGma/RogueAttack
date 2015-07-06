@@ -6,8 +6,10 @@ function MakeMyAttacks()
 	local h = MobHealth_GetTargetCurHP()
 	local inFight = UnitAffectingCombat("player")
 	
-	--DEFAULT_CHAT_FRAME:AddMessage("Debug")
+	--DEFAULT_CHAT_FRAME:AddMessage("Debug")	
 	
+	-- Falls MobHealth_GetTargetCurHP nil geliefert hat wird die HP des Targets auf 0 gesetzt
+	if h == nil then h = 0 end
 	-- Wenn man im Kampf ist und nur noch 5 % HP oder darunter hat, dann wird ein Heiltrank genommen
 	if playerHealth <= 5 and inFight == 1 then
 		useContainerItemByName("Erheblicher Heiltrank") -- 1050-1751
