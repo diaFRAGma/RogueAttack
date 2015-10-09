@@ -6,7 +6,16 @@ function MakeMyAttacks()
 	local h = MobHealth_GetTargetCurHP()
 	local inFight = UnitAffectingCombat("player")
 	
-	--DEFAULT_CHAT_FRAME:AddMessage("Debug")	
+	local i = 0
+	while targetSwitchRequired() == true do
+		TargetNearestEnemy()
+		i = i + 1
+		if i == 10 then
+			do break end
+		end
+	end
+
+	--DEFAULT_CHAT_FRAME:AddMessage("Debug")
 	
 	-- Falls MobHealth_GetTargetCurHP nil geliefert hat wird die HP des Targets auf 0 gesetzt
 	if h == nil then h = 0 end
@@ -28,6 +37,22 @@ function MakeMyAttacks()
 	elseif e >= 40 then
 		CastSpellByName("Finsterer Sto\195\159")
 	end
+end
+
+function targetSwitchRequired()
+	if inFight == 1 and (UnitName("target") == nil or not UnitIsEnemy("player","target") or UnitIsDead("target")) then
+		return true
+	elseif inFight == 1 then
+		if IsBuffActive("Verwandlung", "target") then return true end
+		if IsBuffActive("Winterschlaf", "target") then return true end
+		if IsBuffActive("Kopfnuss", "target") then return true end
+		if IsBuffActive("Eisk\195\164ltefalle", "target") then return true end
+		if IsBuffActive("Untote fesseln", "target") then return true end
+		if IsBuffActive("Bu\195\159e", "target") then return true end
+		if IsBuffActive("Verbannen", "target") then return true end
+		
+	end
+	return false
 end
 
 function useContainerItemByName(pName)
