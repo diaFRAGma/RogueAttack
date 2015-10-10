@@ -1,3 +1,5 @@
+local actionSlotWithKick = 0
+
 function MakeMyAttacks()
 	local c=GetComboPoints()
 	local b=IsBuffActive("Zerh\195\164ckseln")
@@ -7,6 +9,20 @@ function MakeMyAttacks()
 	local inFight = UnitAffectingCombat("player")
 	local actionSlotWithAutoAttack = 0
 	
+	--DEFAULT_CHAT_FRAME:AddMessage("Debug")
+	
+	for i = 1, 108 do
+		if GetActionTexture(i) == GetInventoryItemTexture("player", 16) and GetActionText(i) == nil then
+			actionSlotWithAutoAttack = i
+		end
+		if GetActionTexture(i) == "Interface\\Icons\\Ability_Kick" and GetActionText(i) == nil then
+			actionSlotWithKick = i
+		end		
+	end
+	if actionSlotWithKick == 0 then
+		DEFAULT_CHAT_FRAME:AddMessage("RogueAttack konnte Tritt nicht in der Aktionsleiste finden.", 1.0, 0.0, 0.0)
+	end
+	
 	local i = 0
 	while targetSwitchRequired() == true do
 		TargetNearestEnemy()
@@ -15,19 +31,16 @@ function MakeMyAttacks()
 			do break end
 		end
 	end
-
-	for i = 1, 108 do
-		if GetActionTexture(i) == GetInventoryItemTexture("player", 16) and GetActionText(i) == nil then
-			actionSlotWithAutoAttack = i
-		end
+	
+	if targetSwitchRequired() == true then
+		return
 	end
+	
 	if actionSlotWithAutoAttack == 0 then
 		DEFAULT_CHAT_FRAME:AddMessage("RogueAttack konnte Angreifen nicht in der Aktionsleiste finden.", 1.0, 0.0, 0.0)
 	else
 		if not IsCurrentAction(actionSlotWithAutoAttack) then UseAction(actionSlotWithAutoAttack) end;
 	end
-
-	--DEFAULT_CHAT_FRAME:AddMessage("Debug")
 	
 	-- Falls MobHealth_GetTargetCurHP nil geliefert hat wird die HP des Targets auf 0 gesetzt
 	if h == nil then h = 0 end
@@ -39,6 +52,7 @@ function MakeMyAttacks()
 		useContainerItemByName("Heiltrank") -- 280-361
 		useContainerItemByName("Geringer Heiltrank") -- 140-181
 	end
+
 	-- Wenn man min. 1 Combopunkt hat, Zerhäckseln inaktiv ist und man min. 25 Energie hat wird Zerhäckseln aktiviert
 	if c > 0 and not b and e >= 25 then
 		CastSpellByName("Zerh\195\164ckseln")
@@ -52,9 +66,9 @@ function MakeMyAttacks()
 end
 
 function targetSwitchRequired()
-	if inFight == 1 and (UnitName("target") == nil or not UnitIsEnemy("player","target") or UnitIsDead("target")) then
+	if IsActionInRange(actionSlotWithKick) == 0 or UnitName("target") == nil or not UnitIsEnemy("player","target") or UnitIsDead("target") then
 		return true
-	elseif inFight == 1 then
+	else
 		if IsBuffActive("Verwandlung", "target") then return true end
 		if IsBuffActive("Winterschlaf", "target") then return true end
 		if IsBuffActive("Kopfnuss", "target") then return true end
@@ -62,7 +76,6 @@ function targetSwitchRequired()
 		if IsBuffActive("Untote fesseln", "target") then return true end
 		if IsBuffActive("Bu\195\159e", "target") then return true end
 		if IsBuffActive("Verbannen", "target") then return true end
-		
 	end
 	return false
 end
