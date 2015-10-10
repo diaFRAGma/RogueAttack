@@ -5,6 +5,7 @@ function MakeMyAttacks()
 	local playerHealth=UnitHealth("player")*100/UnitHealthMax("player")
 	local h = MobHealth_GetTargetCurHP()
 	local inFight = UnitAffectingCombat("player")
+	local actionSlotWithAutoAttack = 0
 	
 	local i = 0
 	while targetSwitchRequired() == true do
@@ -13,6 +14,17 @@ function MakeMyAttacks()
 		if i == 10 then
 			do break end
 		end
+	end
+
+	for i = 1, 108 do
+		if GetActionTexture(i) == GetInventoryItemTexture("player", 16) and GetActionText(i) == nil then
+			actionSlotWithAutoAttack = i
+		end
+	end
+	if actionSlotWithAutoAttack == 0 then
+		DEFAULT_CHAT_FRAME:AddMessage("RogueAttack konnte Angreifen nicht in der Aktionsleiste finden.", 1.0, 0.0, 0.0)
+	else
+		if not IsCurrentAction(actionSlotWithAutoAttack) then UseAction(actionSlotWithAutoAttack) end;
 	end
 
 	--DEFAULT_CHAT_FRAME:AddMessage("Debug")
