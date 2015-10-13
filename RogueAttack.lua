@@ -1,7 +1,8 @@
 local actionSlotWithKick = 0
+local c = 0
 
 function MakeMyAttacks()
-	local c=GetComboPoints()
+	c = GetComboPoints()
 	local b=IsBuffActive("Zerh\195\164ckseln")
 	local e=UnitMana("player")
 	local playerHealth=UnitHealth("player")*100/UnitHealthMax("player")
@@ -67,7 +68,11 @@ end
 
 function targetSwitchRequired()
 	if IsActionInRange(actionSlotWithKick) == 0 or UnitName("target") == nil or not UnitIsEnemy("player","target") or UnitIsDead("target") then
-		return true
+		if c > 0 then
+			return false
+		else
+			return true
+		end
 	else
 		if IsBuffActive("Verwandlung", "target") then return true end
 		if IsBuffActive("Winterschlaf", "target") then return true end
