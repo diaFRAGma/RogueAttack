@@ -40,7 +40,7 @@ function MakeMyAttacks()
 	if actionSlotWithAutoAttack == 0 then
 		DEFAULT_CHAT_FRAME:AddMessage("RogueAttack konnte Angreifen nicht in der Aktionsleiste finden.", 1.0, 0.0, 0.0)
 	else
-		if not IsCurrentAction(actionSlotWithAutoAttack) then UseAction(actionSlotWithAutoAttack) end;
+		if not IsCurrentAction(actionSlotWithAutoAttack) then UseAction(actionSlotWithAutoAttack) end
 	end
 	
 	-- Falls MobHealth_GetTargetCurHP nil geliefert hat wird die HP des Targets auf 0 gesetzt
