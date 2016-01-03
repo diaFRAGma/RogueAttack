@@ -1,5 +1,6 @@
 local actionSlotWithKick = 0
 local c = 0
+local poisonWarning = true
 
 function MakeMyAttacks()
 	c = GetComboPoints()
@@ -11,6 +12,17 @@ function MakeMyAttacks()
 	local actionSlotWithAutoAttack = 0
 	
 	--DEFAULT_CHAT_FRAME:AddMessage("Debug")
+	
+	if not IsBuffActive("Sofort wirkendes Gift VI", "mainhand") and poisonWarning then
+		UIErrorsFrame:AddMessage("Sofort wirkendes Gift VI auf der Waffenhand ist ausgelaufen.", 1.0, 0.0, 0.0, nil, 5)
+		DEFAULT_CHAT_FRAME:AddMessage("Sofort wirkendes Gift VI auf der Waffenhand ist ausgelaufen.", 1.0, 0.0, 0.0)
+		PlaySound("igQuestFailed", "master")
+	end
+	if not IsBuffActive("Sofort wirkendes Gift VI", "offhand") and poisonWarning then
+		UIErrorsFrame:AddMessage("Sofort wirkendes Gift VI auf der Schildhand ist ausgelaufen.", 1.0, 0.0, 0.0, nil, 5)
+		DEFAULT_CHAT_FRAME:AddMessage("Sofort wirkendes Gift VI auf der Schildhand ist ausgelaufen.", 1.0, 0.0, 0.0)
+		PlaySound("igQuestFailed", "master")
+	end
 	
 	for i = 1, 108 do
 		if GetActionTexture(i) == GetInventoryItemTexture("player", 16) or GetActionTexture(i) == "Interface\\Buttons\\Spell-Reset" and GetActionText(i) == nil then
@@ -168,5 +180,14 @@ function getRank(pSpellName)
 			return spellRank
 		end
 		i = i + 1
+	end
+end
+
+function SwitchPoisonWarning()
+	poisonWarning = not poisonWarning
+	if poisonWarning then
+		DEFAULT_CHAT_FRAME:AddMessage("Gift Warnung: an", 0.0, 1.0, 0.0)
+	else
+		DEFAULT_CHAT_FRAME:AddMessage("Gift Warnung: aus", 1.0, 0.0, 0.0)
 	end
 end
