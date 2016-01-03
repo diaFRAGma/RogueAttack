@@ -13,7 +13,7 @@ function MakeMyAttacks()
 	--DEFAULT_CHAT_FRAME:AddMessage("Debug")
 	
 	for i = 1, 108 do
-		if GetActionTexture(i) == GetInventoryItemTexture("player", 16) and GetActionText(i) == nil then
+		if GetActionTexture(i) == GetInventoryItemTexture("player", 16) or GetActionTexture(i) == "Interface\\Buttons\\Spell-Reset" and GetActionText(i) == nil then
 			actionSlotWithAutoAttack = i
 		end
 		if GetActionTexture(i) == "Interface\\Icons\\Ability_Kick" and GetActionText(i) == nil then
