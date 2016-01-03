@@ -67,7 +67,8 @@ function MakeMyAttacks()
 end
 
 function targetSwitchRequired()
-	if IsActionInRange(actionSlotWithKick) == 0 or UnitName("target") == nil or not UnitIsEnemy("player","target") or UnitIsDead("target") then
+-- or not UnitIsEnemy("player","target")
+	if IsActionInRange(actionSlotWithKick) == 0 or UnitName("target") == nil or UnitIsDead("target") then
 		if c > 0 then
 			return false
 		else
