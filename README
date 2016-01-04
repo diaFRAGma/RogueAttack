@@ -3,10 +3,11 @@ World of Warcraft 1.12.1 Addon für Schurken
 Im Spiel muss ein Makro angelegt werden mit folgendem Inhalt:
 /run MakeMyAttacks()
 Wenn das Makro durch betätigen des Knopfes ausgelöst wird, laufen folgende Entscheidungen ab:
-1. Wenn man im Kampf ist und nur noch 5 % HP oder darunter hat, dann wird ein Heiltrank genommen, wenn im Inventar einer zu finden ist.
-2. Wenn Zeräckseln nicht aktiv ist, man aber mindestens ein Combopunkt hat und man mindestens 25 Energie hat wird Zerhäckseln aktiviert.
-3. Wenn man 5 Combopunkte hat oder der Gegner fast tot ist (siehe Fast tot Erläuterung) und man mindestens 35 Energie hat wird Ausweiden benutzt.
-4. Wenn man mindestens 40 Energie hat wird Finsterer Stoß benutzt um Combopunkte aufzubauen
+1. Wenn weder Sofort wirkendes Gift VI noch Verdichteter Wetzstein auf den Waffen aktiv ist, dann wird eine Fehlermeldung asgegeben und ein Warnton abgespielt. Mit dem Befehl /run SwitchPoisonWarning() kann die Warnung aus und wieder eingeschaltet werden. Nach einem Neustart ist die Warnung immer an, damit man es nicht vergisst wieder zu aktivieren.
+2. Wenn man im Kampf ist und nur noch 5 % HP oder darunter hat, dann wird ein Heiltrank genommen, wenn im Inventar einer zu finden ist.
+3. Wenn Zeräckseln nicht aktiv ist, man aber mindestens ein Combopunkt hat und man mindestens 25 Energie hat wird Zerhäckseln aktiviert.
+4. Wenn man 5 Combopunkte hat oder der Gegner fast tot ist (siehe Fast tot Erläuterung) und man mindestens 35 Energie hat wird Ausweiden benutzt.
+5. Wenn man mindestens 40 Energie hat wird Finsterer Stoß benutzt um Combopunkte aufzubauen
 
 Fast tot:
 Ein Gegner wird als fast tot erkannt, wenn man mit den vorhandenen Combopunkten Ausweiden auf ihn wirkt und er danach vermutlich tot ist.
