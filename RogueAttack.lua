@@ -13,14 +13,14 @@ function MakeMyAttacks()
 	
 	--DEFAULT_CHAT_FRAME:AddMessage("Debug")
 	
-	if not IsBuffActive("Sofort wirkendes Gift VI", "mainhand") and poisonWarning then
-		UIErrorsFrame:AddMessage("Sofort wirkendes Gift VI auf der Waffenhand ist ausgelaufen.", 1.0, 0.0, 0.0, nil, 5)
-		DEFAULT_CHAT_FRAME:AddMessage("Sofort wirkendes Gift VI auf der Waffenhand ist ausgelaufen.", 1.0, 0.0, 0.0)
+	if not IsBuffActive("Sofort wirkendes Gift VI", "mainhand") and not IsBuffActive("Verdichteter Wetzstein", "mainhand") and poisonWarning then
+		UIErrorsFrame:AddMessage("Waffenhand-Verzauberung ist ausgelaufen.", 1.0, 0.0, 0.0, nil, 5)
+		DEFAULT_CHAT_FRAME:AddMessage("Waffenhand-Verzauberung ist ausgelaufen.", 1.0, 0.0, 0.0)
 		PlaySound("igQuestFailed", "master")
 	end
-	if not IsBuffActive("Sofort wirkendes Gift VI", "offhand") and poisonWarning then
-		UIErrorsFrame:AddMessage("Sofort wirkendes Gift VI auf der Schildhand ist ausgelaufen.", 1.0, 0.0, 0.0, nil, 5)
-		DEFAULT_CHAT_FRAME:AddMessage("Sofort wirkendes Gift VI auf der Schildhand ist ausgelaufen.", 1.0, 0.0, 0.0)
+	if not IsBuffActive("Sofort wirkendes Gift VI", "offhand") and not IsBuffActive("Verdichteter Wetzstein", "offhand") and poisonWarning then
+		UIErrorsFrame:AddMessage("Schildhand-Verzauberung ist ausgelaufen.", 1.0, 0.0, 0.0, nil, 5)
+		DEFAULT_CHAT_FRAME:AddMessage("Schildhand-Verzauberung ist ausgelaufen.", 1.0, 0.0, 0.0)
 		PlaySound("igQuestFailed", "master")
 	end
 	
