@@ -1,9 +1,10 @@
 local actionSlotWithKick = 0
 local c = 0
 local poisonWarning = true
+local buff=""
 
 function MakeMyAttacks()
-	c = GetComboPoints()
+	local c = GetComboPoints()
 	local b=IsBuffActive("Zerh\195\164ckseln")
 	local e=UnitMana("player")
 	local playerHealth=UnitHealth("player")*100/UnitHealthMax("player")
@@ -14,10 +15,17 @@ function MakeMyAttacks()
 	--DEFAULT_CHAT_FRAME:AddMessage("Debug")
 	
 	-- SDK oder NoSDK Equip anlegen
-	local buff="noSDK"
-	if IsBuffActive("Segen der Könige") or IsBuffActive("Großer Segen der Könige") then buff="Normal" end
+	oldBuff=buff
+	if IsBuffActive("Segen der Könige") or IsBuffActive("Großer Segen der Könige") then
+		buff="Normal"
+	else
+		buff="noSDK"
+	end
 	outfit, categoryid=Outfitter_FindOutfitByName(buff)
 	Outfitter_WearOutfit(outfit,categoryid)
+	if oldBuff ~= buff then
+		DEFAULT_CHAT_FRAME:AddMessage(buff.." wurde angelegt.")
+	end
 
 	if not IsBuffActive("Sofort wirkendes Gift VI", "mainhand") and not IsBuffActive("Verdichteter Wetzstein", "mainhand") and poisonWarning then
 		UIErrorsFrame:AddMessage("Waffenhand-Verzauberung ist ausgelaufen.", 1.0, 0.0, 0.0, nil, 5)
