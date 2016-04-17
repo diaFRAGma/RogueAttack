@@ -4,5 +4,5 @@
 ## Notes: Decides which skill the rogue uses.
 ## Notes-deDE: Entscheidet welche Fähigkeit vom Schurken genutzt wird.
 ## Author: Ambro
-## Dependencies: IsBuffActive, MobInfo2
+## Dependencies: IsBuffActive, MobInfo2, Outfitter
 RogueAttack.lua

@@ -13,6 +13,12 @@ function MakeMyAttacks()
 	
 	--DEFAULT_CHAT_FRAME:AddMessage("Debug")
 	
+	-- SDK oder NoSDK Equip anlegen
+	local buff="noSDK"
+	if IsBuffActive("Segen der Könige") or IsBuffActive("Großer Segen der Könige") then buff="Normal" end
+	outfit, categoryid=Outfitter_FindOutfitByName(buff)
+	Outfitter_WearOutfit(outfit,categoryid)
+
 	if not IsBuffActive("Sofort wirkendes Gift VI", "mainhand") and not IsBuffActive("Verdichteter Wetzstein", "mainhand") and poisonWarning then
 		UIErrorsFrame:AddMessage("Waffenhand-Verzauberung ist ausgelaufen.", 1.0, 0.0, 0.0, nil, 5)
 		DEFAULT_CHAT_FRAME:AddMessage("Waffenhand-Verzauberung ist ausgelaufen.", 1.0, 0.0, 0.0)
